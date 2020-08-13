@@ -32,11 +32,11 @@
             this.tableName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.DatosTable = new System.Windows.Forms.DataGridView();
-            this.ActionAddTable = new System.Windows.Forms.Button();
             this.NombreC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TVariable = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.NotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.PK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ActionAddTable = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DatosTable)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +63,7 @@
             this.panel1.Controls.Add(this.DatosTable);
             this.panel1.Location = new System.Drawing.Point(12, 69);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(450, 206);
+            this.panel1.Size = new System.Drawing.Size(561, 206);
             this.panel1.TabIndex = 3;
             // 
             // DatosTable
@@ -76,19 +76,9 @@
             this.PK});
             this.DatosTable.Location = new System.Drawing.Point(3, 0);
             this.DatosTable.Name = "DatosTable";
-            this.DatosTable.Size = new System.Drawing.Size(443, 204);
+            this.DatosTable.Size = new System.Drawing.Size(529, 204);
             this.DatosTable.TabIndex = 0;
             this.DatosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // ActionAddTable
-            // 
-            this.ActionAddTable.Location = new System.Drawing.Point(289, 26);
-            this.ActionAddTable.Name = "ActionAddTable";
-            this.ActionAddTable.Size = new System.Drawing.Size(75, 23);
-            this.ActionAddTable.TabIndex = 4;
-            this.ActionAddTable.Text = "Agregar";
-            this.ActionAddTable.UseVisualStyleBackColor = true;
-            this.ActionAddTable.Click += new System.EventHandler(this.ActionAddTable_Click);
             // 
             // NombreC
             // 
@@ -116,12 +106,22 @@
             this.PK.HeaderText = "PK";
             this.PK.Name = "PK";
             // 
+            // ActionAddTable
+            // 
+            this.ActionAddTable.Location = new System.Drawing.Point(289, 26);
+            this.ActionAddTable.Name = "ActionAddTable";
+            this.ActionAddTable.Size = new System.Drawing.Size(75, 23);
+            this.ActionAddTable.TabIndex = 4;
+            this.ActionAddTable.Text = "Agregar";
+            this.ActionAddTable.UseVisualStyleBackColor = true;
+            this.ActionAddTable.Click += new System.EventHandler(this.ActionAddTable_Click);
+            // 
             // AddTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(485, 287);
+            this.ClientSize = new System.Drawing.Size(615, 287);
             this.Controls.Add(this.ActionAddTable);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableName);

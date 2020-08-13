@@ -26,8 +26,6 @@ namespace Proyecto1TBD2
 
         private void IndexManagement_Load(object sender, EventArgs e)
         {
-
-
         }
 
 
@@ -86,7 +84,7 @@ namespace Proyecto1TBD2
 
         private void cmdAgregar_Click(object sender, EventArgs e)
         {
-            string cellName = DatosTable.CurrentCell.ToString();
+            string cellName = DatosTable.CurrentCell.Value.ToString();
             string indexname = indexName.Text;
             string tablename = tableName.Text;
             OdbcConnection conn = new OdbcConnection();
@@ -106,7 +104,6 @@ namespace Proyecto1TBD2
             cmd += " " + tablename + "(" + cellName + ")";
             MessageBox.Show(cmd);
             conn.ConnectionString = cs;
-           /*
             try
             {
                 conn.Open();
@@ -117,7 +114,7 @@ namespace Proyecto1TBD2
             catch (Exception a)
             {
                 MessageBox.Show(a.Message);
-            }*/
+            }
         }
 
     }

@@ -625,8 +625,11 @@ namespace Proyecto1TBD2
             char delimitador = '\\';
             string[] aux = auxdb.Split(delimitador);
             dbName = aux[2].Trim();
-            string cmd = "select * from sysindexes"+" ";
-            cmd += "where idxname=" + "'" + nodeSelected + "'";
+            string cmd = "select si.idxname, si.owner, si.tabid, st.tabname "+
+                "from sysindexes si inner "+
+                "join systables st "+
+                "on si.tabid = st.tabid"+" ";
+              cmd += "where si.idxname=" + "'"+ nodeSelected+"'";
                 OdbcConnection conn = new OdbcConnection();
                 OdbcDataAdapter adapter;
                 string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
@@ -640,6 +643,7 @@ namespace Proyecto1TBD2
                  user + ";" +
                 "PWD=" +
                 pass + ";";
+                MessageBox.Show(cmd);
                 conn.ConnectionString = cs;
                 try
                 {

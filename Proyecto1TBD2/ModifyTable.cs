@@ -104,7 +104,7 @@ namespace Proyecto1TBD2
         {
             OdbcConnection conn = new OdbcConnection();
             OdbcCommand commandAdd;
-            bool cola = false;
+         
             int getRows = DatosTable.Rows.Count - 1;
             string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
             "HOST=127.0.0.1; " +
