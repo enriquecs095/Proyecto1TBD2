@@ -21,3 +21,8 @@ C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto
 C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\bin\x64\Debug\ibm.data.informix.dll
 C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\bin\x64\Debug\Informix.Net.Core.dll
 C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.AddTable.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.AddView.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.ModifyTable.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.RecordsManagement.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.IndexManagement.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.ViewManagement.resources

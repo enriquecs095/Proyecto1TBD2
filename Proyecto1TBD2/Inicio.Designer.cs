@@ -24,7 +24,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.MenuTreeView = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -48,12 +50,25 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnActualizar);
             this.panel1.Controls.Add(this.MenuTreeView);
             this.panel1.Location = new System.Drawing.Point(3, 50);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(209, 512);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.btnActualizar.Enabled = false;
+            this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
+            this.btnActualizar.Location = new System.Drawing.Point(176, 3);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(26, 23);
+            this.btnActualizar.TabIndex = 1;
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.button1_Click);
             // 
             // MenuTreeView
             // 
@@ -138,6 +153,7 @@
             this.ListData.Name = "ListData";
             this.ListData.Size = new System.Drawing.Size(595, 342);
             this.ListData.TabIndex = 0;
+            this.ListData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListData_CellContentClick);
             // 
             // panel3
             // 
@@ -199,6 +215,7 @@
         private System.Windows.Forms.DataGridView ListData;
         private System.Windows.Forms.Panel panel3;
         public System.Windows.Forms.TextBox OutputMessage;
+        private System.Windows.Forms.Button btnActualizar;
     }
 
 }

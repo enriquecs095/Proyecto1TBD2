@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tableName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ActionAddTable = new System.Windows.Forms.Button();
             this.DatosTable = new System.Windows.Forms.DataGridView();
+            this.ActionAddTable = new System.Windows.Forms.Button();
             this.NombreC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TVariable = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Null = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.NotNull = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.PK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DatosTable)).BeginInit();
@@ -51,12 +51,12 @@
             this.label1.Text = "Nombre de la tabla:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // tableName
             // 
-            this.textBox1.Location = new System.Drawing.Point(121, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(158, 20);
-            this.textBox1.TabIndex = 2;
+            this.tableName.Location = new System.Drawing.Point(121, 26);
+            this.tableName.Name = "tableName";
+            this.tableName.Size = new System.Drawing.Size(158, 20);
+            this.tableName.TabIndex = 2;
             // 
             // panel1
             // 
@@ -65,6 +65,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(450, 206);
             this.panel1.TabIndex = 3;
+            // 
+            // DatosTable
+            // 
+            this.DatosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DatosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NombreC,
+            this.TVariable,
+            this.NotNull,
+            this.PK});
+            this.DatosTable.Location = new System.Drawing.Point(3, 0);
+            this.DatosTable.Name = "DatosTable";
+            this.DatosTable.Size = new System.Drawing.Size(443, 204);
+            this.DatosTable.TabIndex = 0;
+            this.DatosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // ActionAddTable
             // 
@@ -76,20 +90,6 @@
             this.ActionAddTable.UseVisualStyleBackColor = true;
             this.ActionAddTable.Click += new System.EventHandler(this.ActionAddTable_Click);
             // 
-            // DatosTable
-            // 
-            this.DatosTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DatosTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NombreC,
-            this.TVariable,
-            this.Null,
-            this.PK});
-            this.DatosTable.Location = new System.Drawing.Point(3, 0);
-            this.DatosTable.Name = "DatosTable";
-            this.DatosTable.Size = new System.Drawing.Size(443, 204);
-            this.DatosTable.TabIndex = 0;
-            this.DatosTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
             // NombreC
             // 
             this.NombreC.HeaderText = "Nombre";
@@ -99,17 +99,17 @@
             // 
             this.TVariable.HeaderText = "Variable";
             this.TVariable.Items.AddRange(new object[] {
-            "Integer",
+            "Int",
             "char(20)",
             "boolean",
             "decimal",
             "float"});
             this.TVariable.Name = "TVariable";
             // 
-            // Null
+            // NotNull
             // 
-            this.Null.HeaderText = "Null";
-            this.Null.Name = "Null";
+            this.NotNull.HeaderText = "Not Null";
+            this.NotNull.Name = "NotNull";
             // 
             // PK
             // 
@@ -124,7 +124,7 @@
             this.ClientSize = new System.Drawing.Size(485, 287);
             this.Controls.Add(this.ActionAddTable);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tableName);
             this.Controls.Add(this.label1);
             this.Name = "AddTable";
             this.Text = "AddTable";
@@ -138,13 +138,13 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tableName;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView DatosTable;
         private System.Windows.Forms.Button ActionAddTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreC;
         private System.Windows.Forms.DataGridViewComboBoxColumn TVariable;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Null;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn NotNull;
         private System.Windows.Forms.DataGridViewCheckBoxColumn PK;
     }
 }
