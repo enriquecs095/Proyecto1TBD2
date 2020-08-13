@@ -26,3 +26,6 @@ C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto
 C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.RecordsManagement.resources
 C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.IndexManagement.resources
 C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.ViewManagement.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.AddProcedure.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.ModifyActions.resources
+C:\Users\Enrique\source\repos\Proyecto1TBD2\Proyecto1TBD2\obj\x64\Debug\Proyecto1TBD2.AddTrigger.resources

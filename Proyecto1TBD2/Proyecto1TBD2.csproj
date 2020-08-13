@@ -108,11 +108,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddProcedure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddProcedure.Designer.cs">
+      <DependentUpon>AddProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddTable.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddTable.Designer.cs">
       <DependentUpon>AddTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddTrigger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddTrigger.Designer.cs">
+      <DependentUpon>AddTrigger.cs</DependentUpon>
     </Compile>
     <Compile Include="AddView.cs">
       <SubType>Form</SubType>
@@ -131,6 +143,12 @@
     </Compile>
     <Compile Include="Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModifyActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyActions.Designer.cs">
+      <DependentUpon>ModifyActions.cs</DependentUpon>
     </Compile>
     <Compile Include="ModifyTable.cs">
       <SubType>Form</SubType>
@@ -152,8 +170,14 @@
     <Compile Include="ViewManagement.Designer.cs">
       <DependentUpon>ViewManagement.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddProcedure.resx">
+      <DependentUpon>AddProcedure.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddTable.resx">
       <DependentUpon>AddTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddTrigger.resx">
+      <DependentUpon>AddTrigger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddView.resx">
       <DependentUpon>AddView.cs</DependentUpon>
@@ -163,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyActions.resx">
+      <DependentUpon>ModifyActions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifyTable.resx">
       <DependentUpon>ModifyTable.cs</DependentUpon>

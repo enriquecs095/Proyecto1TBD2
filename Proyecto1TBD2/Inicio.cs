@@ -41,6 +41,12 @@ namespace Proyecto1TBD2
         ToolStripMenuItem Option20;//Agregar tabla 
         ToolStripMenuItem Option21;//Agregar tabla
         ToolStripMenuItem Option22;//Manipular datos
+        ToolStripMenuItem Option23;//Agregar funcion
+        ToolStripMenuItem Option24;//Agregar procedure
+        ToolStripMenuItem Option25;//Manipular procedure
+        ToolStripMenuItem Option26;//eliminar procedure
+        ToolStripMenuItem Option27;//agregar procedure
+        ToolStripMenuItem Option28;//agregar procedure
 
         Form Login;
         ContextMenuStrip OptionsMenu1;
@@ -54,6 +60,10 @@ namespace Proyecto1TBD2
         ContextMenuStrip OptionsMenu9;
         ContextMenuStrip OptionsMenu10;
         ContextMenuStrip OptionsMenu11;
+        ContextMenuStrip OptionsMenu12; //agregar funcion
+        ContextMenuStrip OptionsMenu13;
+        ContextMenuStrip OptionsMenu14;//agregar procedure
+        ContextMenuStrip OptionsMenu15;//agregar trigger
         bool connected = false;
         string user;
         string pass;
@@ -77,15 +87,24 @@ namespace Proyecto1TBD2
             Option10.Click += new EventHandler(VerIndice);
             Option11.Click += new EventHandler(ManipularIndices);
             Option12.Click += new EventHandler(EliminarIndices);
+            Option13.Click += new EventHandler(VerFuncion);
+            Option15.Click += new EventHandler(EliminarFuncion);
+            Option16.Click += new EventHandler(VerTrigger);
+            Option18.Click += new EventHandler(EliminarTrigger);
             Option20.Click += new EventHandler(AgregarTabla);
             Option21.Click += new EventHandler(AgregarVista);
             Option22.Click += new EventHandler(ManipularDatos);
+            Option23.Click += new EventHandler(AgregarFuncion);
+            Option24.Click += new EventHandler(VerProcedimiento);
+            Option26.Click += new EventHandler(EliminarProcedimiento);
+            Option27.Click += new EventHandler(AgregarFuncion);//agregar procedure
+            Option28.Click += new EventHandler(AgregarTrigger);//agregar procedure
         }
 
         protected void InitializeMenuTreeView()
         {
             MenuTreeView.Nodes.Add("Informix-SQL");
-            MenuTreeView.Nodes.Add("NoSQL");
+            MenuTreeView.Nodes.Add("Comandos-SQL");
             Option1 = new ToolStripMenuItem();
             Option1.Text = "Conectar";
             Option2 = new ToolStripMenuItem();
@@ -105,23 +124,23 @@ namespace Proyecto1TBD2
             Option9 = new ToolStripMenuItem();
             Option9.Text = "Eliminar Vista";
             Option10 = new ToolStripMenuItem();
-            Option10.Text = "Ver Indice";////aqui estoy
+            Option10.Text = "Ver Indice";
             Option11 = new ToolStripMenuItem();
             Option11.Text = "Manipular Datos";
             Option12 = new ToolStripMenuItem();
             Option12.Text = "Eliminar Indice";
             Option13 = new ToolStripMenuItem();
-            Option13.Text = "Ver Funciones";
+            Option13.Text = "Ver Funcion";
             Option14 = new ToolStripMenuItem();
-            Option14.Text = "Modificar Funciones";
+            Option14.Text = "Modificar Funcion";
             Option15 = new ToolStripMenuItem();
-            Option15.Text = "Eliminar Funciones";
+            Option15.Text = "Eliminar Funcion";
             Option16 = new ToolStripMenuItem();
-            Option16.Text = "Ver Disparadores";
+            Option16.Text = "Ver Disparador";
             Option17 = new ToolStripMenuItem();
-            Option17.Text = "Modificar Disparadores";
+            Option17.Text = "Modificar Disparador";
             Option18 = new ToolStripMenuItem();
-            Option18.Text = "Eliminar Disparadores";
+            Option18.Text = "Eliminar Disparador";
             Option19 = new ToolStripMenuItem();
             Option19.Text = "Eliminar BD";
             Option20 = new ToolStripMenuItem();
@@ -130,6 +149,18 @@ namespace Proyecto1TBD2
             Option21.Text = "Agregar vista";
             Option22 = new ToolStripMenuItem();
             Option22.Text = "Manipular Datos";
+            Option23 = new ToolStripMenuItem();
+            Option23.Text = "Agregar funcion";
+            Option24 = new ToolStripMenuItem();
+            Option24.Text = "Ver Procedimiento";
+            Option25 = new ToolStripMenuItem();
+            Option25.Text = "Modificar Procedimiento";
+            Option26 = new ToolStripMenuItem();
+            Option26.Text = "Eliminar Procedimiento";
+            Option27 = new ToolStripMenuItem();
+            Option27.Text = "Agregar Procedimiento";
+            Option28 = new ToolStripMenuItem();
+            Option28.Text = "Agregar Disparador";
             OptionsMenu1 = new ContextMenuStrip();
             OptionsMenu2 = new ContextMenuStrip();
             OptionsMenu3 = new ContextMenuStrip();
@@ -141,6 +172,10 @@ namespace Proyecto1TBD2
             OptionsMenu9 = new ContextMenuStrip();
             OptionsMenu10 = new ContextMenuStrip();
             OptionsMenu11 = new ContextMenuStrip();
+            OptionsMenu12 = new ContextMenuStrip();
+            OptionsMenu13 = new ContextMenuStrip();
+            OptionsMenu14 = new ContextMenuStrip();
+            OptionsMenu15 = new ContextMenuStrip();
             MenuTreeView.Nodes[0].ContextMenuStrip= OptionsMenu1;//en conexion
             OptionsMenu1.Items.AddRange(new ToolStripMenuItem[] { Option1, Option2 });
             OutputMessage.Text = "*************Seleccione accion a ejecutar";
@@ -248,7 +283,6 @@ namespace Proyecto1TBD2
                 commandAdd = new OdbcCommand(cmd, conn);
                 commandAdd.ExecuteNonQuery();
                 MessageBox.Show("Indice eliminado");
-                UpdateData();
             }
             catch (Exception a)
             {
@@ -258,6 +292,160 @@ namespace Proyecto1TBD2
         }
 
 
+
+        protected void AgregarFuncion(object sender, EventArgs e) {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            AddProcedure addProcedure = new AddProcedure();
+            addProcedure.Parameters(dbName, user, pass);
+            addProcedure.ShowDialog();
+        }
+
+        protected void VerFuncion(object sender, EventArgs e)
+        {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            string cmd = "select procname, owner, procid, mode, retsize,symsize,isproc" +
+                           " from sysprocedures where procname ="+ "'"+nodeSelected+"'"+
+                           "and isproc='f'";
+            OdbcConnection conn = new OdbcConnection();
+            OdbcDataAdapter adapter;
+            string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
+            "HOST=127.0.0.1; " +
+            "SERVER=lo_informix1410;" +
+            "DATABASE=" +
+             dbName + ";" +
+            "SERVICE=lo_informix1410;" +
+            "PROTOCOL=olsoctcp;" +
+            "UID=" +
+             user + ";" +
+            "PWD=" +
+            pass + ";";
+            conn.ConnectionString = cs;
+            try
+            {
+                DataTable tmpTable = new DataTable();
+                conn.Open();
+                adapter = new OdbcDataAdapter(cmd, conn);
+                adapter.Fill(tmpTable);
+                ListData.DataSource = tmpTable;
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
+
+        }
+
+
+        protected void EliminarFuncion(object sender, EventArgs e) {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            OdbcConnection conn = new OdbcConnection();
+            OdbcCommand commandAdd;
+            string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
+            "HOST=127.0.0.1; " +
+            "SERVER=lo_informix1410;" +
+            "DATABASE=" +
+             dbName + ";" +
+            "SERVICE=lo_informix1410;" +
+            "PROTOCOL=olsoctcp;" +
+            "UID=" +
+             user + ";" +
+            "PWD=" +
+             pass + ";";
+            string cmd = "drop function "+ nodeSelected;
+            MessageBox.Show(cmd);
+            conn.ConnectionString = cs;
+            try
+            {
+                conn.Open();
+                commandAdd = new OdbcCommand(cmd, conn);
+                commandAdd.ExecuteNonQuery();
+                MessageBox.Show("Funcion Eliminada");
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Error al eliminar funcion");
+            }
+
+        }
+
+        protected void VerProcedimiento(object sender, EventArgs e)
+        {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            string cmd = "select procname, owner, procid, mode, retsize,symsize,isproc" +
+                           " from sysprocedures where procname =" + "'" + nodeSelected + "'" +
+                           "and isproc='t'";
+            OdbcConnection conn = new OdbcConnection();
+            OdbcDataAdapter adapter;
+            string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
+            "HOST=127.0.0.1; " +
+            "SERVER=lo_informix1410;" +
+            "DATABASE=" +
+             dbName + ";" +
+            "SERVICE=lo_informix1410;" +
+            "PROTOCOL=olsoctcp;" +
+            "UID=" +
+             user + ";" +
+            "PWD=" +
+            pass + ";";
+            conn.ConnectionString = cs;
+            try
+            {
+                DataTable tmpTable = new DataTable();
+                conn.Open();
+                adapter = new OdbcDataAdapter(cmd, conn);
+                adapter.Fill(tmpTable);
+                ListData.DataSource = tmpTable;
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
+
+        }
+
+
+        protected void EliminarProcedimiento(object sender, EventArgs e)
+        {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            OdbcConnection conn = new OdbcConnection();
+            OdbcCommand commandAdd;
+            string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
+            "HOST=127.0.0.1; " +
+            "SERVER=lo_informix1410;" +
+            "DATABASE=" +
+             dbName + ";" +
+            "SERVICE=lo_informix1410;" +
+            "PROTOCOL=olsoctcp;" +
+            "UID=" +
+             user + ";" +
+            "PWD=" +
+             pass + ";";
+            string cmd = "drop procedure " + nodeSelected;
+            MessageBox.Show(cmd);
+            conn.ConnectionString = cs;
+            try
+            {
+                conn.Open();
+                commandAdd = new OdbcCommand(cmd, conn);
+                commandAdd.ExecuteNonQuery();
+                MessageBox.Show("Procedimiento Eliminado");
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Error al eliminar procedimiento");
+            }
+
+        }
 
 
         protected void VerVistas(object sender, EventArgs e) {
@@ -291,8 +479,93 @@ namespace Proyecto1TBD2
                 MessageBox.Show(a.Message);
             }
 
+        }
+
+        protected void AgregarTrigger(object sender, EventArgs e)
+        {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            AddTrigger addTrigger = new AddTrigger();
+            addTrigger.Parameters(dbName, user, pass);
+            addTrigger.ShowDialog();
+        }
+
+        protected void VerTrigger(object sender, EventArgs e)
+        {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            string cmd = "select * from systriggers where trigname = " +
+                            "'" + nodeSelected + "'";               
+            OdbcConnection conn = new OdbcConnection();
+            OdbcDataAdapter adapter;
+            string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
+            "HOST=127.0.0.1; " +
+            "SERVER=lo_informix1410;" +
+            "DATABASE=" +
+             dbName + ";" +
+            "SERVICE=lo_informix1410;" +
+            "PROTOCOL=olsoctcp;" +
+            "UID=" +
+             user + ";" +
+            "PWD=" +
+            pass + ";";
+            conn.ConnectionString = cs;
+            try
+            {
+                DataTable tmpTable = new DataTable();
+                conn.Open();
+                adapter = new OdbcDataAdapter(cmd, conn);
+                adapter.Fill(tmpTable);
+                ListData.DataSource = tmpTable;
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message);
+            }
 
         }
+
+        protected void EliminarTrigger(object sender, EventArgs e)
+        {
+            char delimitador = '\\';
+            string[] aux = auxdb.Split(delimitador);
+            dbName = aux[2].Trim();
+            OdbcConnection conn = new OdbcConnection();
+            OdbcCommand commandAdd;
+            string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
+            "HOST=127.0.0.1; " +
+            "SERVER=lo_informix1410;" +
+            "DATABASE=" +
+             dbName + ";" +
+            "SERVICE=lo_informix1410;" +
+            "PROTOCOL=olsoctcp;" +
+            "UID=" +
+             user + ";" +
+            "PWD=" +
+             pass + ";";
+            string cmd = "drop trigger " + nodeSelected;
+            MessageBox.Show(cmd);
+            conn.ConnectionString = cs;
+            try
+            {
+                conn.Open();
+                commandAdd = new OdbcCommand(cmd, conn);
+                commandAdd.ExecuteNonQuery();
+                MessageBox.Show("Disparador Eliminado");
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Error al eliminar disparador");
+            }
+
+        }
+
+
+
+
+
         protected void AgregarTabla(object sender, EventArgs e)
         {
             char delimitador = '\\';
@@ -340,7 +613,6 @@ namespace Proyecto1TBD2
                 commandAdd = new OdbcCommand(cmd, conn);
                 commandAdd.ExecuteNonQuery();
                 MessageBox.Show("Tabla eliminada");
-                UpdateData();
             }
             catch (Exception a)
             {
@@ -500,6 +772,7 @@ namespace Proyecto1TBD2
                     ListIndexes();
                     ListFunctions();
                     ListTriggers();
+                    ListProcedures();
                     OptionsMenu();
                 }
                 catch (Exception a)
@@ -521,6 +794,11 @@ namespace Proyecto1TBD2
             OptionsMenu9.Items.AddRange(new ToolStripMenuItem[] { Option20 });
             OptionsMenu10.Items.AddRange(new ToolStripMenuItem[] { Option21 });
             OptionsMenu11.Items.AddRange(new ToolStripMenuItem[] { Option11 });
+            OptionsMenu12.Items.AddRange(new ToolStripMenuItem[] { Option23 });
+            OptionsMenu13.Items.AddRange(new ToolStripMenuItem[] { Option24, Option25, Option26 });
+            OptionsMenu14.Items.AddRange(new ToolStripMenuItem[] { Option27 });
+            OptionsMenu15.Items.AddRange(new ToolStripMenuItem[] { Option28 });
+
             MenuTreeView.Nodes[0].Nodes[0].ContextMenuStrip = OptionsMenu7;
             for (int i = 0; i < lstDatabases.Count; i++)
             {
@@ -529,10 +807,15 @@ namespace Proyecto1TBD2
                 int countIndexes = MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[2].Nodes.Count;
                 int countFunctions = MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[3].Nodes.Count;
                 int countTriggers = MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[4].Nodes.Count;
+                int countProcedures = MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[5].Nodes.Count;
                 MenuTreeView.Nodes[0].Nodes[0].Nodes[i].ContextMenuStrip = OptionsMenu8;
                 MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[0].ContextMenuStrip = OptionsMenu9;
                 MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[1].ContextMenuStrip = OptionsMenu10;
                 MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[2].ContextMenuStrip = OptionsMenu11;
+                MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[3].ContextMenuStrip = OptionsMenu12;
+                MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[4].ContextMenuStrip = OptionsMenu15;
+                MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[5].ContextMenuStrip = OptionsMenu14;
+
                 for (int j = 0; j < countTables; j++)
                 {
                     MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[0].Nodes[j].ContextMenuStrip = OptionsMenu2;
@@ -553,6 +836,11 @@ namespace Proyecto1TBD2
                 for (int j = 0; j < countTriggers; j++)
                 {
                     MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[4].Nodes[j].ContextMenuStrip = OptionsMenu6;
+                }
+
+                for (int j = 0; j < countProcedures; j++)
+                {
+                    MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[5].Nodes[j].ContextMenuStrip = OptionsMenu13;
                 }
             }
         }
@@ -608,6 +896,7 @@ namespace Proyecto1TBD2
                 MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes.Add("Indices");
                 MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes.Add("Funciones");
                 MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes.Add("Disparadores");
+                MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes.Add("Procedimientos");
             }
         }
 
@@ -725,13 +1014,11 @@ namespace Proyecto1TBD2
                 }
             }
 
-
-
         }
 
         protected void ListFunctions()
         {
-            string cmd = "select procname from sysprocedures;";
+            string cmd = "select procname from sysprocedures where procid>559 and isproc='f';";
             for (int i = 0; i < lstDatabases.Count; i++)
             {
                 OdbcConnection conn = new OdbcConnection();
@@ -757,6 +1044,43 @@ namespace Proyecto1TBD2
                     foreach (DataRow row in tmpTable.Rows)
                     {
                         MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[3].Nodes.Add(row[0].ToString());
+                    }
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message);
+                }
+            }
+        }
+
+        protected void ListProcedures()
+        {
+            string cmd = "select procname from sysprocedures where procid>559 and isproc='t';";
+            for (int i = 0; i < lstDatabases.Count; i++)
+            {
+                OdbcConnection conn = new OdbcConnection();
+                OdbcDataAdapter adapter;
+                string cs = "DRIVER={IBM INFORMIX ODBC DRIVER (64-bit)};  " +
+                "HOST=127.0.0.1; " +
+                "SERVER=lo_informix1410;" +
+                "DATABASE=" +
+                 lstDatabases[i] + ";" +
+                "SERVICE=lo_informix1410;" +
+                "PROTOCOL=olsoctcp;" +
+                "UID=" +
+                 user + ";" +
+                "PWD=" +
+                pass + ";";
+                conn.ConnectionString = cs;
+                try
+                {
+                    DataTable tmpTable = new DataTable();
+                    conn.Open();
+                    adapter = new OdbcDataAdapter(cmd, conn);
+                    adapter.Fill(tmpTable);
+                    foreach (DataRow row in tmpTable.Rows)
+                    {
+                        MenuTreeView.Nodes[0].Nodes[0].Nodes[i].Nodes[5].Nodes.Add(row[0].ToString());
                     }
                 }
                 catch (Exception a)
@@ -863,6 +1187,7 @@ namespace Proyecto1TBD2
                 ListIndexes();
                 ListFunctions();
                 ListTriggers();
+                ListProcedures();
                 OptionsMenu();
             }
             catch (Exception a)
@@ -880,11 +1205,6 @@ namespace Proyecto1TBD2
 
 }
 
-//string cs = "FileDsn =C:\\informixdb.dsn; UID=informix; PWD=informix1;";
-// string cs = "DRIVER=IBM INFORMIX ODBC DRIVER (64-bit):9089; host=127.0.0.1; database=prueba; UID=informix; PWD=informix1";
-// String cs = "DRIVER=IBM INFORMIX ODBC DRIVER (64-bit); DATABASE = sysmaster; HOST = 127.0.0.1; SERVER = lo_informix141; SERVICE = lo_informix1410; PROTOCOL = olsoctcp; CLIENT_LOCALE = en_US.CP1252; DB_LOCALE = en_US.819; UID=informix; PWD=informix1";
-//  String cs = "DRIVER=IBM INFORMIX ODBC DRIVER (64-bit); DATABASE = sysmaster; HOST = 127.0.0.1; SERVER = lo_informix141; SERVICE = lo_informix1410; PROTOCOL = olsoctcp; CLIENT_LOCALE = en_US.CP1252; DB_LOCALE = en_US.819; ";
-//String cs = "Host= 127.0.0.1; Service=1492; Server=lo_informix1410; Database=prueba; Protocol=olsoctcp; UID=informix; PWD=informix1 ";
 
 // DataTable data = new DataTable();
 // adapter.Fill(data);
@@ -917,4 +1237,10 @@ namespace Proyecto1TBD2
                 MessageBox.Show(ex.Message);
             }
         }
-        */
+        
+
+          " case "+ 
+         "when (isproc) = 'f' then 'Funcion' "+
+         "when (isproc) = 't' then 'Procedimiento' "+
+         " end as Tipo "+
+*/
